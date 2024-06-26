@@ -1,43 +1,153 @@
 <!DOCTYPE html>
 <html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:ezy="http://www.ezyplatform.com/thymeleaf/layout"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{ezytheme}">
-    
-<body>
-<div layout:fragment="content" class="container">
-    <div class="row">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:ezy="http://www.ezyplatform.com/thymeleaf/layout"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{ezytheme}"
+>
+  <body>
+    <div layout:fragment="content" class="container content-container">
+      <div class="row">
         <div class="col-lg-6">
-            <div class="post-main-item">
-                <img src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured11-scaled-1-1024x1024.webp">
-                <div>
-                    <i>[[#{by}]]</i>
-                    <b>Nhat Anh</b>
-                </div>
-                <span class="date-string">2024-06-12</span>
-                <div>
-                    Together happy feelings continue juvenile had off one. Unknown may service subject her letters one bed. Down has…
-                </div>
+          <div class="card--big">
+            <a href=""
+              ><img
+                class="image"
+                src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured11-scaled-1-1024x1024.webp"
+            /></a>
+            <div class="card-author">
+              <i>by </i><a href="#"><b>[[#{by}]]</b></a>
             </div>
+            <div class="card-title">
+              <a href="#"><b>[[#{card_title}]]</b></a>
+            </div>
+            <span class="card-date date-string">2024-06-12</span>
+            <div class="card-content">
+              Together happy feelings continue juvenile had off one. Unknown may
+              service subject her letters one bed. Down has…
+            </div>
+          </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <img src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured4-scaled-1-440x440.webp">
+          <div class="list-card--main">
+            <div class="card--medium">
+              <a href="#"
+                ><img
+                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured4-scaled-1-440x440.webp"
+              /></a>
+              <div class="card-author">
+                <i>by </i><a href="#"><b>[[#{by}]]</b></a>
+              </div>
+              <div class="card-title">
+                <a href="#"><b>[[#{card_title}]]</b></a>
+              </div>
+              <span class="card-date date-string">2024-06-12</span>
+            </div>
+            <div class="card--medium">
+              <a href="#"
+                ><img
+                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured4-scaled-1-440x440.webp"
+              /></a>
+              <div class="card-author">
+                <i>by </i><a href="#"><b>[[#{by}]]</b></a>
+              </div>
+              <div class="card-title">
+                <a href="#"><b>[[#{card_title}]]</b></a>
+              </div>
+              <span class="card-date date-string">2024-06-12</span>
+            </div>
+          </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <img src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp">
+          <div class="list-card--trending">
+            <div class="list-card__title">
+              <span>[[#{trending}]]</span>
+              <div class="list-card__des">
+                <p>[[#{message_trending}]]</p>
+              </div>
+            </div>
+            <!-- Top 5 card trending -->
+            <div class="card-short">
+              <a href="#"
+                ><img
+                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
+              /></a>
+              <div class="card-short__detail">
+                <div class="card-title">
+                  <a href="#"><b>[[#{card_title}]]</b></a>
+                </div>
+                <div>
+                  <p class="card-view">[[#{view}]]</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-short">
+              <a href="#"
+                ><img
+                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
+              /></a>
+              <div class="card-short__detail">
+                <div class="card-title">
+                  <a href="#"><b>[[#{card_title}]]</b></a>
+                </div>
+                <div>
+                  <p class="card-view">[[#{view}]]</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-short">
+              <a href="#"
+                ><img
+                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
+              /></a>
+              <div class="card-short__detail">
+                <div class="card-title">
+                  <a href="#"><b>[[#{card_title}]]</b></a>
+                </div>
+                <div>
+                  <p class="card-view">[[#{view}]]</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-short">
+              <a href="#"
+                ><img
+                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
+              /></a>
+              <div class="card-short__detail">
+                <div class="card-title">
+                  <a href="#"><b>[[#{card_title}]]</b></a>
+                </div>
+                <div>
+                  <p class="card-view">[[#{view}]]</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-short">
+              <a href="#"
+                ><img
+                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
+              /></a>
+              <div class="card-short__detail">
+                <div class="card-title">
+                  <a href="#"><b>[[#{card_title}]]</b></a>
+                </div>
+                <div>
+                  <p class="card-view">[[#{view}]]</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6"></div>
+        <div class="col-lg-3 col-md-6"></div>
+        <div class="col-lg-3 col-md-6"></div>
+        <div class="col-lg-3 col-md-6"></div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-lg-3 col-md-6"></div>
-        <div class="col-lg-3 col-md-6"></div>
-        <div class="col-lg-3 col-md-6"></div>
-        <div class="col-lg-3 col-md-6"></div>
-    </div>
-</div>
-<th:block layout:fragment="post-scripts">
-
-</th:block>
-</body>
+    <th:block layout:fragment="post-scripts"> </th:block>
+  </body>
 </html>

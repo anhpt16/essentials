@@ -39,7 +39,9 @@
 
 .header-left {
     @extend %header-container;
-
+    &:first-child {
+        padding-left: 0;
+    }
     &__logo {
         border-right: 1px solid #EBEBEB;
         
@@ -126,9 +128,7 @@
             border-radius: 50%;
             background-color: #F5F5F5;
             cursor: pointer;
-            i {
-                
-            }
+            
         }
     }
 }
