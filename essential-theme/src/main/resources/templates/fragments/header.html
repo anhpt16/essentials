@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div th:fragment="header" class="content">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid header-container--expand">
+          <div class="container header-container--collapse">
+            <ul class="header-left">
+              <li class="header-left__logo">
+                <a href="#">[[#{home}]]</a>
+              </li>
+              <li class="header-left__demo">
+                <a href="#">[[#{demo}]]</a>
+                <i class="fas fa-angle-down"></i>
+                <ul class="sub-menu">
+                  <!-- Sub menu -->
+                  <li><a href="#">Demo 1</a></li>
+                  <li><a href="#">Demo 2</a></li>
+                </ul>
+              </li>
+              <li class="header-left__feature">
+                <a href="#">[[#{features}]]</a>
+                <i class="fas fa-angle-down"></i>
+                <ul class="sub-menu">
+                  <!-- Sub menu -->
+                  <li><a href="#">Post</a></li>
+                  <li><a href="#">Post Format</a></li>
+                </ul>
+              </li>
+              <li class="header-left__lifestyle">
+                <a href="#">[[#{lifestyle}]]</a>
+              </li>
+              <li class="header-left__travel">
+                <a href="#">[[#{travel}]]</a>
+              </li>
+              <li class="header-left__beauty">
+                <a href="#">[[#{beauty}]]</a>
+              </li>
+            </ul>
+            <ul class="header-right">
+              <li class="header-right__mode">
+                <a>
+                  <i class="fas fa-lightbulb"></i>
+                </a>
+              </li>
+              <li class="header-right__search">
+                <a>
+                  <i class="fas fa-search"></i>
+                </a>
+              </li>
+              <li class="header-right__follow">
+                <a href="#">[[#{followme}]]</a>
+                
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <script th:fragment="scripts" type="text/javascript"></script>
+  </body>
+</html>
