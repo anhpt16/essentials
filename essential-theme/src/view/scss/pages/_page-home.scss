@@ -1,113 +1,53 @@
-// Color
-$text-color-primary: #131315;
-$text-color-light: #989BA2;
-
-
-// Card Generral
-
-%card-general {
-  img {
-    border-radius: 5px;
-    width: 100%;
-    height: auto;
-  }
-  .card-title {
-    font-weight: 800;
-    a {
-      text-decoration: none;
-      color: $text-color-primary;
-    };
-  };
-  .card-author {
-    a {
-      text-decoration: none;
-      color: $text-color-primary;
-    }
-  };
-  .card-date {
-    color: $text-color-light;
-  }
-  .card-content {
-    color: $text-color-light;
-  }
-  .card-view {
-    color: $text-color-light;
-  }
-}
-
-// Mixins
-@mixin card-style($font-size-title, $font-size-content, $font-size-detail){
-  .card-title {font-size: $font-size-title;}
-  .card-content {font-size: $font-size-content;}
-  .card-date {font-size: $font-size-detail;}
-  .card-author {font-size: $font-size-detail;}
-  .card-view {font-size: $font-size-detail;}
-}
-
-// Content
 .content-container {
-  padding-top: 50px;
+  padding: 50px 10px 0px 10px;
   gap: 20px;
 }
 
 // Card chính
 .card--big {
   @extend %card-general;
-  @include card-style(28px, 18px, 12px);
+  @include card-style($card-big-text-title, $card-big-text-content, $card-big-text-detail);
   display: flex;
   flex-flow: column;
   gap: 15px;
-  padding-right: 15px;
+  // padding-right: 15px;
 }
-// Card phụ
-.card--medium {
-  @extend %card-general;
-  @include card-style(20px, 12px, 12px);
-  display: flex;
-  flex-flow: column;
-  gap: 15px;
-}
-// Card nhỏ
-.card-short {
-  @extend %card-general;
-  @include card-style(14px, 12px, 14px);
-  display: flex;
-  flex-flow: row;
-  padding: 10px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  gap: 10px;
-  border-radius: 5px;
-  &__detail {
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    .card-view {
-      margin: 0;
-    }
-  }
-}
+
+
 
 // List card phụ
 .list-card--main {
   display: flex;
   flex-flow: column;
   gap: 50px;
-  padding: 0 15px;
+  // padding: 0 15px;
 }
-//list card treanding
+//list card trending
 .list-card--trending {
-  padding-left: 15px;
+  // padding-left: 15px;
   display: flex;
   flex-flow: column;
   gap: 15px;
 }
+// title cho list card
 .list-card__title {
-  span {
-    color: $text-color-primary;
-    font-size: 20px;
-    font-weight: 800;    
+  .container-for-title {
+    display: flex;
+    .title-section {
+      color: $text-color-primary;
+      font-size: 20px;
+      font-weight: 800;
+      flex: 0 auto;  
+    };
+    .line {
+      border-bottom: 0.5px solid $line-color-light;
+      width: 100%;
+      margin-bottom: 6px;
+      margin-left: 10px;
+      flex: 1;
+    };
   }
-  .list-card__des {
+  .des-section {
     padding-top: 10px;
     p {
       color: $text-color-light;
@@ -115,3 +55,80 @@ $text-color-light: #989BA2;
     }
   }
 }
+// list card featured
+.list-card--feature {
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+}
+.card-feature--main {
+  margin-top: 10px;
+}
+
+
+
+// list card whiteboard
+.list-card--whiteboard {
+  &> .list-card__title {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    .container-for-title .title-section {
+      font-size: $card-big-text-title;
+    }
+  }
+}
+
+
+// Chuyển trang
+.page-switch {
+
+  .container-for-switch {
+    margin-top: 30px;
+    border-top: .5px solid $line-color-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .switch-page {
+      margin: 20px 10px;
+      background-color: #F5F5F5;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      a {
+        font-size: $card-small-text-detail;
+        color: $text-color-primary;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+// Responsive
+
+@media (max-width: 575.98px) {
+  .content-container {
+    padding: 30px 30px;
+  }
+  .card--medium {
+    @include card-style($card-medium-text-title + 5px, $card-medium-text-content, $card-medium-text-content)
+  }
+  .card-short {
+    @include card-style($card-small-text-title + 5px, $card-small-text-content, $card-medium-text-detail + 5px)
+  }
+}
+
+@media (max-width: 767.98px) {}
+@media (max-width: 991.98px) {}
+@media (max-width: 1199.98px) {}
+@media (max-width: 1399.98px) {}

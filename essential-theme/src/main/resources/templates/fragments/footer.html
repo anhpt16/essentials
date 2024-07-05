@@ -1,8 +1,117 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
-<footer th:fragment="footer" class="content">
-</footer>
-</body>
+  <body>
+    <footer th:fragment="footer" class="content">
+      <div class="container-fluid container-footer-style">
+        <div class="container">
+          <!-- Phần subcribe -->
+          <div class="footer-subcribe">
+            <div class="footer-subcribe__title">
+              Never trust atoms; they make up everything
+            </div>
+            <div class="footer-subcribe__notify">
+              Subscribe to my newsletter for all the latest updates:
+            </div>
+            <div class="footer-subcribe__input">
+              <div class="container-for-subcribe">
+                <input
+                  type="text"
+                  placeholder="Your email address"
+                  name=""
+                  id=""
+                />
+                <a href="">
+                  <div class="btn-subcribe">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>subcribe</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Phần 4 cột -->
+          <div class="row gx-8 gy-5 footer-table">
+            <!-- Phần list card trending -->
+            <div class="col-lg-3 col-md-6 list-card--feature">
+                <!-- Phần tiêu đề -->
+                <div class="list-card__title">
+                  <div class="container-for-title">
+                    <div class="title-section">[[#{trending}]]</div>
+                    <div class="line"></div>
+                  </div>
+                  <div class="des-section">
+                    <p>[[#{card_trending_description}]]</p>
+                  </div>
+                </div>
+                <!-- Phần card -->
+                <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+                <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+            </div>
+            <!-- Phần list card featured -->
+            <div class="col-lg-3 col-md-6 list-card--feature">
+              <!-- Phần tiêu đề -->
+              <div class="list-card__title">
+                <div class="container-for-title">
+                  <div class="title-section">[[#{feature}]]</div>
+                  <div class="line"></div>
+                </div>
+                <div class="des-section">
+                  <p>[[#{card_featured_description}]]</p>
+                </div>
+              </div>
+              <!-- Phần card -->
+              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+            </div>
+            <!-- Phần list card editor -->
+            <div class="col-lg-3 col-md-6 list-card--feature">
+              <!-- Phần tiêu đề -->
+              <div class="list-card__title">
+                <div class="container-for-title">
+                  <div class="title-section">[[#{editor_pick}]]</div>
+                  <div class="line"></div>
+                </div>
+                <div class="des-section">
+                  <p>[[#{card_editor_description}]]</p>
+                </div>
+              </div>
+              <!-- Phần card -->
+              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+            </div>
+            <!-- Phần danh mục -->
+            <div class="col-lg-3 col-md-6 list-card--feature">
+              <!-- Phần tiêu đề -->
+              <div class="list-card__title">
+                <div class="container-for-title">
+                  <div class="title-section">[[#{category}]]</div>
+                  <div class="line"></div>
+                </div>
+              </div>
+              <!-- Phần các danh mục -->
+               <ul class="footer-category">
+                <li><a href="#">Văn học</a></li>
+                <li><a href="#">Công nghệ</a></li>
+                <li><a href="#">Giáo dục</a></li>
+                <li><a href="#">Tài chính</a></li>
+               </ul>
+            </div>
+          </div>
+          <!-- Phần Mạng xã hội -->
+          <div class="footer-media">
+            <a href="#"><div>
+              <i class="fab fa-instagram" style="color: #ff8080;"></i>
+            </div></a>
+            <a href="#"><div>
+              <i class="fab fa-facebook-f" style="color: #0080ff;"></i>
+            </div></a>
+            <a href="#"><div>
+              <i class="fab fa-youtube" style="color: #ff0000;"></i>
+            </div></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

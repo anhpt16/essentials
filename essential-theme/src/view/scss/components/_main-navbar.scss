@@ -1,11 +1,9 @@
-// Color
-
-
 // Header
 .header-container--expand {
-    background-color: white ;
-    height: 80px;
-    opacity: 0.8;
+    background-color: rgba(255,255,255,.8);
+    backdrop-filter: blur(15px);
+    height: 80px;                                                             
+    opacity: 0.9;
     border-bottom: 0.5px solid #EBEBEB;
 }
 .header-container--collapse {
@@ -14,6 +12,10 @@
 }
 .navbar {
     padding: 0;
+    position: relative;
+    right: 0;
+    left: 0;
+    z-index: 3000;
 }
 
 %header-container {
@@ -44,10 +46,16 @@
     }
     &__logo {
         border-right: 1px solid #EBEBEB;
-        
         a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-right: 20px;
             font-size: 25px !important;
+            img {
+                height: 80px;
+
+            }
         }
     }
 
@@ -68,7 +76,6 @@
                 display: block;
             }
         }
-
         position: relative;
         .sub-menu {
             display: none;

@@ -17,20 +17,26 @@
 @import "helper/_variables";
 @import "helper/_utilities";
 
+//mixins
+@import "mixins/_mixin";
+
 //Bootstrap Custom
 @import 'vendor/_bootstrap-custom';
 
 // Base stuff
 @import "base/_typography";
-
+@import "base/variables";
+@import "base/_utils";
 @import "helper/_mixins";
 @import "helper/_functions";
 @import "helper/_common";
 
 // Components and modules
-@import "components/_authen";
 @import "components/_main-navbar";
-
+@import "components/_main-footer";
+@import "components/cards/card-short";
+@import "components/cards/card-medium";
+@import "components/cards/card-whiteboard";
 
 // Layout related stylesheets
 @import "layout/_fixed-contact";
@@ -40,6 +46,7 @@
 // Page-specific stylesheets
 @import "pages/_page-error";
 @import "pages/_page-home";
+@import "pages/_page-details";
 
 // Vendors and external stylesheets
 body {

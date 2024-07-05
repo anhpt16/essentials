@@ -8,34 +8,28 @@
           <div class="container header-container--collapse">
             <ul class="header-left">
               <li class="header-left__logo">
-                <a href="#">[[#{home}]]</a>
+                <a href="/"><img src="/images/logo.svg" alt="Trang Chủ"></a>
               </li>
               <li class="header-left__demo">
-                <a href="#">[[#{demo}]]</a>
-                <i class="fas fa-angle-down"></i>
-                <ul class="sub-menu">
-                  <!-- Sub menu -->
-                  <li><a href="#">Demo 1</a></li>
-                  <li><a href="#">Demo 2</a></li>
-                </ul>
-              </li>
-              <li class="header-left__feature">
-                <a href="#">[[#{features}]]</a>
-                <i class="fas fa-angle-down"></i>
-                <ul class="sub-menu">
-                  <!-- Sub menu -->
-                  <li><a href="#">Post</a></li>
-                  <li><a href="#">Post Format</a></li>
-                </ul>
-              </li>
-              <li class="header-left__lifestyle">
-                <a href="#">[[#{lifestyle}]]</a>
+                <a href="/posts">[[#{category}]]</a>
+                <th:block th:if="${categories.size() > 0}">
+                  <i class="fas fa-angle-down"></i>
+                  <ul class="sub-menu">
+                    <!-- Sub menu -->
+                    <li th:each="category : ${categories}">
+                      <a th:href="${'/categories/' + category.slug}">[[${category.name}]]</a>
+                    </li>
+                  </ul>
+                </th:block>
               </li>
               <li class="header-left__travel">
-                <a href="#">[[#{travel}]]</a>
+                <a href="#">[[#{post}]]</a>
               </li>
               <li class="header-left__beauty">
-                <a href="#">[[#{beauty}]]</a>
+                <a href="#">[[#{about}]]</a>
+              </li>
+              <li class="header-left__travel">
+                <a href="#">[[#{contact}]]</a>
               </li>
             </ul>
             <ul class="header-right">
@@ -58,6 +52,8 @@
         </div>
       </nav>
     </div>
-    <script th:fragment="scripts" type="text/javascript"></script>
+    <script th:fragment="scripts" type="text/javascript">
+
+    </script>
   </body>
 </html>

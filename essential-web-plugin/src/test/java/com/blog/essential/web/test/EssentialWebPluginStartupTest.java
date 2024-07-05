@@ -10,7 +10,8 @@ import com.tvd12.ezyhttp.server.core.annotation.PropertiesSources;
 })
 @ComponentsScan({
     "org.youngmonkeys.ezyplatform",
-    "com.blog.essential"
+    "com.blog.essential",
+    "org.youngmonkeys.ezyarticle"
 })
 public class EssentialWebPluginStartupTest {
 

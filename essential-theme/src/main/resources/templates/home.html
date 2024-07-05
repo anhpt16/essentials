@@ -8,144 +8,133 @@
 >
   <body>
     <div layout:fragment="content" class="container content-container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="card--big">
-            <a href=""
-              ><img
-                class="image"
-                src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured11-scaled-1-1024x1024.webp"
-            /></a>
-            <div class="card-author">
-              <i>by </i><a href="#"><b>[[#{by}]]</b></a>
+      <div class="row gx-8 gy-5">
+
+        <div class="col-lg-9">
+          <!-- Hàng 1 chứa 3 bài viết chính -->
+          <div class="row gx-8 gy-5">
+
+            <div class="col-lg-8">
+              <!-- Bài post chính -->
+              <div class="card--big">
+                <a th:href="${'/posts/' + mainPost.slug}">
+                  <img class="image" th:src="${mainPost.image != null ? mainPost.image.getUrlOrNull() : ''}"
+                  />
+                </a>
+                <div class="card-author">
+                  <i>by </i><a href="#"><b>[[${mainPost.author.name}]]</b></a>
+                </div>
+                <div class="card-title">
+                  <a th:href="${'/posts/' + mainPost.slug}"><b>[[${mainPost.title}]]</b></a>
+                </div>
+                <span class="card-date date-string"
+                  >[[${mainPost.publishedAt}]]</span
+                >
+                <div class="card-content">
+                  [[${mainPost.content.replaceAll("<[^>]*>", "")}]]
+                </div>
+              </div>
             </div>
-            <div class="card-title">
-              <a href="#"><b>[[#{card_title}]]</b></a>
-            </div>
-            <span class="card-date date-string">2024-06-12</span>
-            <div class="card-content">
-              Together happy feelings continue juvenile had off one. Unknown may
-              service subject her letters one bed. Down has…
+
+            <div class="col-lg-4">
+              <!-- 2 bài viết phụ -->
+              <div class="row gx-6 gy-5">
+                <div th:replace="~{fragments/cards/card_extra :: card_extra}"></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="list-card--main">
-            <div class="card--medium">
-              <a href="#"
-                ><img
-                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured4-scaled-1-440x440.webp"
-              /></a>
-              <div class="card-author">
-                <i>by </i><a href="#"><b>[[#{by}]]</b></a>
-              </div>
-              <div class="card-title">
-                <a href="#"><b>[[#{card_title}]]</b></a>
-              </div>
-              <span class="card-date date-string">2024-06-12</span>
-            </div>
-            <div class="card--medium">
-              <a href="#"
-                ><img
-                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured4-scaled-1-440x440.webp"
-              /></a>
-              <div class="card-author">
-                <i>by </i><a href="#"><b>[[#{by}]]</b></a>
-              </div>
-              <div class="card-title">
-                <a href="#"><b>[[#{card_title}]]</b></a>
-              </div>
-              <span class="card-date date-string">2024-06-12</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="list-card--trending">
+          <!-- Hàng 2 chứa bảng các bài viết đáng chú ý-->
+           <!-- Phần tiêu đề -->
+          <div class="list-card--whiteboard">
             <div class="list-card__title">
-              <span>[[#{trending}]]</span>
-              <div class="list-card__des">
-                <p>[[#{message_trending}]]</p>
+              <div class="container-for-title">
+                <div class="title-section">[[#{whiteboard}]]</div>
+                <div class="line"></div>
               </div>
             </div>
-            <!-- Top 5 card trending -->
-            <div class="card-short">
-              <a href="#"
-                ><img
-                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
-              /></a>
-              <div class="card-short__detail">
-                <div class="card-title">
-                  <a href="#"><b>[[#{card_title}]]</b></a>
+            <!-- Phần danh sách card -->
+            <div class="row gx-8 gy-5">
+              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+            </div>
+          </div>
+          <!-- Phần chuyển trang -->
+           <div class="page-switch">
+            <div class="container-for-switch">
+              <div class="switch-page"><a href="#">
+                <i class="fas fa-angle-double-left"></i>
+              </a></div>
+              <div class="switch-page"><a href="#">
+                <i class="fas fa-angle-left"></i>
+              </a></div>
+              <div class="switch-page"><a href="#">
+                1
+              </a></div>
+              <div class="switch-page"><a href="#">
+                2
+              </a></div>
+              <div class="switch-page"><a href="#">
+                ...
+              </a></div>
+              <div class="switch-page"><a href="#">
+                <i class="fas fa-angle-right"></i>
+              </a></div>
+              <div class="switch-page"><a href="#">
+                <i class="fas fa-angle-double-right"></i>
+              </a></div>
+            </div>
+           </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="row gx-8 gy-5">
+            <!-- Phần top 5 bài viết trending -->
+            <div class="col-lg-12 col-md-6 list-card--trending">
+              <!-- Phần tiêu đề cho list card -->
+              <div class="list-card__title">
+                <div class="container-for-title">
+                  <div class="title-section">[[#{trending}]]</div>
+                  <div class="line"></div>
                 </div>
-                <div>
-                  <p class="card-view">[[#{view}]]</p>
+                <div class="des-section">
+                  <p>[[#{message_trending}]]</p>
                 </div>
+              </div>
+              <!-- Top 5 card trending -->
+              <div th:each="mostViewPost : ${mostViewPosts}">
+                <th:block th:replace="~{fragments/cards/card_trending:: content(mostViewPost=${mostViewPost})}" />
               </div>
             </div>
-            <div class="card-short">
-              <a href="#"
-                ><img
-                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
-              /></a>
-              <div class="card-short__detail">
-                <div class="card-title">
-                  <a href="#"><b>[[#{card_title}]]</b></a>
-                </div>
-                <div>
-                  <p class="card-view">[[#{view}]]</p>
+            <!-- Phần các bài viết nổi bật -->
+            <div class="col-lg-12 col-md-6 list-card--feature">
+              <!-- Phần tiêu đề -->
+              <div class="list-card__title">
+                <div class="container-for-title">
+                  <div class="title-section">[[#{feature}]]</div>
+                  <div class="line"></div>
                 </div>
               </div>
-            </div>
-            <div class="card-short">
-              <a href="#"
-                ><img
-                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
-              /></a>
-              <div class="card-short__detail">
-                <div class="card-title">
-                  <a href="#"><b>[[#{card_title}]]</b></a>
+              <!-- Phần bài card chính -->
+               <div class="card-feature--main">
+                <div class="card--medium">
+                  <a href="#">
+                    <img src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured5-scaled-1-440x440.webp" alt="">
+                  </a>
+                  <div class="card-title"><a href="#">[[#{card_title}]]</a></div>
                 </div>
-                <div>
-                  <p class="card-view">[[#{view}]]</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-short">
-              <a href="#"
-                ><img
-                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
-              /></a>
-              <div class="card-short__detail">
-                <div class="card-title">
-                  <a href="#"><b>[[#{card_title}]]</b></a>
-                </div>
-                <div>
-                  <p class="card-view">[[#{view}]]</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-short">
-              <a href="#"
-                ><img
-                  src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured2-scaled-1-150x150.webp"
-              /></a>
-              <div class="card-short__detail">
-                <div class="card-title">
-                  <a href="#"><b>[[#{card_title}]]</b></a>
-                </div>
-                <div>
-                  <p class="card-view">[[#{view}]]</p>
-                </div>
-              </div>
+               </div>
+               <!-- Phần list card nổi bật -->
+               <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+               <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+               <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-6"></div>
-        <div class="col-lg-3 col-md-6"></div>
-        <div class="col-lg-3 col-md-6"></div>
-        <div class="col-lg-3 col-md-6"></div>
       </div>
     </div>
     <th:block layout:fragment="post-scripts"> </th:block>
