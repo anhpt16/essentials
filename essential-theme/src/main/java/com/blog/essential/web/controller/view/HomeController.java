@@ -1,7 +1,9 @@
 package com.blog.essential.web.controller.view;
 
 import com.blog.essential.web.controller.service.WebEssentialPostControllerService;
+import com.blog.essential.web.response.WebLatestPostResponse;
 import com.blog.essential.web.response.WebMostViewPostResponse;
+import com.blog.essential.web.response.WebMostVotePostResponse;
 import com.blog.essential.web.response.WebPostItemResponse;
 import com.tvd12.ezyhttp.server.core.annotation.Controller;
 import com.tvd12.ezyhttp.server.core.annotation.DoGet;
@@ -24,11 +26,17 @@ public class HomeController {
         List<WebPostItemResponse> extraPosts = essentialPostControllerService.getExtraPosts();
         List<WebMostViewPostResponse> mostViewPosts = essentialPostControllerService
             .getMostViewPosts();
+        List<WebMostVotePostResponse> mostVotePosts = essentialPostControllerService
+            .getMostVotePosts();
+        List<WebLatestPostResponse> latestPosts = essentialPostControllerService
+            .getLatestPosts();
         return View.builder()
             .template("home") //--> Hàm
             .addVariable("mainPost", mainPost)
             .addVariable("extraPosts", extraPosts)
             .addVariable("mostViewPosts", mostViewPosts)
+            .addVariable("mostVotePosts", mostVotePosts)
+            .addVariable("latestPosts", latestPosts)
             .addVariable(VIEW_VARIABLE_PAGE_TITLE, "home")
             .build();
     }

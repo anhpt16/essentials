@@ -1,0 +1,31 @@
+%card-general {
+    img {
+      border-radius: 5px;
+      width: 100%;
+      height: auto;
+    }
+    .card-title {
+      @include wrap-text(2);
+      font-weight: 800;
+      a {
+        text-decoration: none;
+        color: $text-color-primary;
+      };
+    };
+    .card-author {
+      a {
+        text-decoration: none;
+        color: $text-color-primary;
+      }
+    };
+    .card-date {
+      color: $text-color-light;
+    }
+    .card-content {
+      @include wrap-text(3);
+      color: $text-color-light;
+    }
+    .card-view {
+      color: $text-color-light;
+    }
+  }

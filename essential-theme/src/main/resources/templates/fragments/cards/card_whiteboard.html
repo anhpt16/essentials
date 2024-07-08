@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+      <div th:fragment="card_whiteboard" class="card--medium card-whiteboard">
+        <a th:href="${'/posts/' + latestPost.slug}"
+          ><img
+          th:src="${latestPost.image.getUrlOrNull()}"
+            alt=""
+        /></a>
+        <div class="card-info">
+          <div class="card-avatar">
+            <a href="#"
+              ><img
+                src="https://secure.gravatar.com/avatar/82d76ac5aea6be5ad3feceb3a8547b41?s=60&d=mm&r=g"
+                alt=""
+              />
+            </a>
+          </div>
+          <div class="container-for-avatar">
+            <div class="card-author">
+              <i>by </i><a href="#"><b>[[${latestPost.author.name}]]</b></a>
+            </div>
+            <div class="card-date date-string">[[${latestPost.publishedAt}]]</div>
+          </div>
+        </div>
+        <div class="card-title"><a th:href="${'/posts/' + latestPost.slug}">[[${latestPost.title}]]</a></div>
+        <div class="card-content" th:utext="${latestPost.content}"></div>
+        <ul class="card-index">
+          <li>
+            <i class="far fa-comment-alt"></i>
+            <span>[[${latestPost.getCommentCount()}]]</span>
+          </li>
+          <li>
+            <i class="far fa-clock"></i>
+            <span>2 min</span>
+          </li>
+          <li>
+            <i class="fas fa-signal"></i>
+            <span>[[${latestPost.getViewCount()}]]K</span>
+          </li>
+        </ul>
+      </div>
+  </body>
+</html>

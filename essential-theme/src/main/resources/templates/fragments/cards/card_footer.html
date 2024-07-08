@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div
+      th:fragment="card_footer (post)"
+      class="card-short card-short--featured content"
+    >
+      <a th:href="${'/posts/' + post.slug}">
+        <img th:src="${post.image.getUrlOrNull()}" />
+      </a>
+      <div class="card-short__detail">
+        <div class="card-title">
+          <a th:href="${'/posts/' + post.slug}"
+            ><b>[[${post.title}]]</b></a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

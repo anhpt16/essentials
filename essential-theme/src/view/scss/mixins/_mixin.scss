@@ -1,0 +1,19 @@
+@mixin wrap-text($line-clamp) {
+    display: -webkit-box;
+    -webkit-line-clamp: $line-clamp;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  @mixin card-style(
+    $font-size-title, 
+    $font-size-content, 
+    $font-size-detail,
+  
+    ){
+    .card-title {font-size: $font-size-title;}
+    .card-content {font-size: $font-size-content;}
+    .card-date {font-size: $font-size-detail;}
+    .card-author {font-size: $font-size-detail;}
+    .card-view {font-size: $font-size-detail;}
+  }

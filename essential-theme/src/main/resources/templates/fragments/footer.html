@@ -45,8 +45,9 @@
                   </div>
                 </div>
                 <!-- Phần card -->
-                <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
-                <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+                <div th:each="trending : ${trendings}">
+                  <th:block th:replace="~{fragments/cards/card_footer :: card_footer(post=${trending})}" />
+                </div>
             </div>
             <!-- Phần list card featured -->
             <div class="col-lg-3 col-md-6 list-card--feature">
@@ -61,8 +62,9 @@
                 </div>
               </div>
               <!-- Phần card -->
-              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
-              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+              <div th:each="featured : ${featureds}">
+                <th:block th:replace="~{fragments/cards/card_footer :: card_footer(post=${featured})}" />
+              </div>
             </div>
             <!-- Phần list card editor -->
             <div class="col-lg-3 col-md-6 list-card--feature">
@@ -77,8 +79,9 @@
                 </div>
               </div>
               <!-- Phần card -->
-              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
-              <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+              <div th:each="featured : ${featureds}">
+                <th:block th:replace="~{fragments/cards/card_footer :: card_footer(post=${featured})}" />
+              </div>
             </div>
             <!-- Phần danh mục -->
             <div class="col-lg-3 col-md-6 list-card--feature">

@@ -43,7 +43,7 @@
               </div>
             </div>
           </div>
-          <!-- Hàng 2 chứa bảng các bài viết đáng chú ý-->
+          <!-- Hàng 2 bảng whiteboard-->
            <!-- Phần tiêu đề -->
           <div class="list-card--whiteboard">
             <div class="list-card__title">
@@ -54,13 +54,9 @@
             </div>
             <!-- Phần danh sách card -->
             <div class="row gx-8 gy-5">
-              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
-              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
-              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
-              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
-              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
-              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
-              <div th:replace="~{fragments/cards/card_whiteboard:: card_whiteboard}"></div>
+              <div class="col-lg-4 col-md-6 col-sm-12" th:each="latestPost : ${latestPosts}">
+                <th:block th:replace="~{fragments/cards/card_whiteboard :: card_whiteboard(latestPost=${latestPost})}"/>
+              </div>
             </div>
           </div>
           <!-- Phần chuyển trang -->
@@ -107,7 +103,7 @@
               </div>
               <!-- Top 5 card trending -->
               <div th:each="mostViewPost : ${mostViewPosts}">
-                <th:block th:replace="~{fragments/cards/card_trending:: content(mostViewPost=${mostViewPost})}" />
+                <th:block th:replace="~{fragments/cards/card_trending :: content(mostViewPost=${mostViewPost})}" />
               </div>
             </div>
             <!-- Phần các bài viết nổi bật -->
@@ -119,19 +115,10 @@
                   <div class="line"></div>
                 </div>
               </div>
-              <!-- Phần bài card chính -->
-               <div class="card-feature--main">
-                <div class="card--medium">
-                  <a href="#">
-                    <img src="https://www.3forty.media/applied/demo-6/wp-content/uploads/2024/04/tfm-featured5-scaled-1-440x440.webp" alt="">
-                  </a>
-                  <div class="card-title"><a href="#">[[#{card_title}]]</a></div>
-                </div>
-               </div>
                <!-- Phần list card nổi bật -->
-               <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
-               <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
-               <div th:replace="~{fragments/cards/card_featured :: card_featured}"></div>
+                <div class="list-card__block" th:each="mostVotePost, iterStat : ${mostVotePosts}">
+                  <th:block th:replace="~{fragments/cards/card_featured :: card_featured(mostVotePost=${mostVotePost}, first=${iterStat.index == 0})}"></th:block>
+                </div>
             </div>
           </div>
         </div>

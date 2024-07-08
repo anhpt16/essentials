@@ -52,6 +52,7 @@
     p {
       color: $text-color-light;
       font-size: 14px;
+      margin-bottom: 0;
     }
   }
 }
@@ -60,10 +61,20 @@
   display: flex;
   flex-flow: column;
   gap: 15px;
+  .list-card__block {
+    .first-card {
+      display: flex;
+      flex-flow: column;
+      margin-bottom: 10px;
+      .card-short__detail {
+        .card-title {
+          font-size: $card-medium-text-title;
+        }
+      }
+    }
+  }
 }
-.card-feature--main {
-  margin-top: 10px;
-}
+
 
 
 

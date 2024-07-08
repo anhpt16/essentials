@@ -1,0 +1,103 @@
+.container-footer-style {
+    background-color: #F7F8FA;
+    margin-top: 50px;
+}
+
+.footer-subcribe {
+    padding: 50px 0px;
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    &__title {
+        font-size: $card-big-text-title;
+        font-weight: 600;
+    }
+    &__notify {
+        color: $text-color-light;
+        font-size: $card-big-text-content;
+    }
+    &__input {
+        .container-for-subcribe {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #FFFFFF;
+            border: .5px solid $line-color-light;
+            height: 50px;
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 5px;
+            width: 500px;
+            max-width: 500px;
+            min-width: 100px;
+            input {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                flex: 1;
+            };
+            a {
+                flex: 0;
+                text-decoration: none;
+                color: white;
+                .btn-subcribe {
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 10px;
+                    border-radius: 50px;
+                    background-color: #2F526F;
+                    i {
+                        margin-right: 5px;
+                    }
+                }
+                &:hover .btn-subcribe{
+                    background-color: #274258;
+                }
+            }
+            
+        }
+    }
+}
+
+.footer-table {
+    padding: 20px;
+    border-bottom: .5px solid $line-color-light;
+}
+
+.footer-category {
+    list-style: none;
+    padding: 0;
+    li {
+        padding: 5px;
+        border-bottom: .5px solid $line-color-light;
+        a {
+            font-size: $card-small-text-title;
+            text-decoration: none;
+            color: $text-color-primary;
+        }
+        a:hover {
+            color: $text-color-light;
+        }
+    }
+}
+
+.footer-media {
+    padding: 30px 0;
+    display: flex;
+    flex-flow: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    a {
+        text-decoration: none;
+        color: black;
+        font-size: 18px
+    };
+    a:hover {
+        opacity: 0.5;
+    }
+}

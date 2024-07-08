@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div
+      th:fragment="card_featured (mostVotePost, first)"
+      class="card-short card-short--featured content"
+      th:classappend="${first} ? 'first-card'"
+    >
+      <a th:href="${'/posts/' + mostVotePost.slug}">
+        <img th:src="${mostVotePost.image.getUrlOrNull()}" />
+      </a>
+      <div class="card-short__detail">
+        <div class="card-title">
+          <a th:href="${'/posts/' + mostVotePost.slug}"
+            ><b>[[${mostVotePost.title}]]</b></a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

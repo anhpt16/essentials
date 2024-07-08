@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:ezy="http://www.ezyplatform.com/thymeleaf/layout"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{ezytheme}"
+>
+<body>
+<div layout:fragment="content" class="container content-container">
+    <!-- Hình ảnh của bài viết -->
+  <div class="row detail-image">
+    <div class="col-12">
+      <img
+        th:src="${post.featuredImage != null ? post.featuredImage.getUrlOrNull() : ''}"
+        alt=""
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <div class="row detail-info">
+            <div class="card-info">
+                <!-- avatar -->
+              <div class="card-avatar">
+                <a href="#"
+                  ><img
+                    src="https://secure.gravatar.com/avatar/82d76ac5aea6be5ad3feceb3a8547b41?s=60&d=mm&r=g"
+                    alt=""
+                  />
+                </a>
+              </div>
+              <div class="container-for-avatar">
+                <div class="card-author">
+                  <i>by </i><a href="#"><b>[[${post.author.name}]]</b></a>
+                </div>
+                <div class="card-date date-string">[[${post.publishedAt}]]</div>
+              </div>
+            </div>
+            <!-- TIêu đề -->
+            <div class="card-title">[[${post.title}]]</div>
+            <!-- Các chỉ số -->
+            <ul class="card-index">
+              <li><a href="#">[[${post.getCommentCount()}]] [[#{comments}]]</a></li>
+              <li><span>2 Phút đọc</span></li>
+              <li><span>[[${viewCount}]] Lượt xem</span></li>
+              <li>
+                <a href="javascript:void(0)" class="vote"
+                   th:attr="onclick=|onPostVoteClick()|">
+                    <i class="fas fa-vote-yea"></i>
+                </a>
+                <span id="vote-count">[[${voteCount}]]</span>
+            </li>
+            </ul>
+        </div>
+        <div class="row detail-content" th:utext="${post.content}"></div>
+        <div class="row detail-tag">
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+            <a href="#" class="tag">#Nghệ thuật</a>
+
+        </div>
+        <div class="row detail-writer">
+            <div class="detail-writer__title">
+                <div class="intro">
+                    <div>[[#{written_by}]]</div>
+                    <a href="#">[[${post.author.name}]]</a>
+                </div>
+                <div class="line"></div>
+            </div>
+            <div class="detail-writer__info">
+                <div class="card-info">
+                    <!-- avatar -->
+                  <div class="card-avatar">
+                    <a href="#"
+                      ><img
+                        src="https://secure.gravatar.com/avatar/82d76ac5aea6be5ad3feceb3a8547b41?s=60&d=mm&r=g"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                  <div class="container-for-intro">
+                    <div class="info-description">
+                        [[#{author_intro}]]
+                    </div>
+                    <div class="info-media">
+                        <a href="#"><div>
+                            <i class="fab fa-instagram" style="color: #ff8080;"></i>
+                          </div></a>
+                          <a href="#"><div>
+                            <i class="fab fa-facebook-f" style="color: #0080ff;"></i>
+                          </div></a>
+                          <a href="#"><div>
+                            <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                          </div></a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row detail-comment">
+            <div class="comment-input">
+                
+            </div>
+            <div class="list-comment">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+<script layout:fragment="scripts" th:inline="javascript">
+/*<![CDATA[*/
+var postSlug = /*[[${post.slug}]]*/;
+/*]]>*/
+
+// ============== vote ==================
+var onPostVoteClick = function() {
+    $.ajax({
+        type: 'POST',
+        url: `/api/v1/posts/${postSlug}/vote`,
+        contentType: 'application/json',
+        success: function (data) {
+            $('#vote-count').text(data.totalVote);
+        },
+        error: function (e) {
+            ezyweb.processUpdateApiErrors({}, e);
+        }
+    });
+}
+</script>
+</body>
+</html>
