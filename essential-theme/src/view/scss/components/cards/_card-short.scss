@@ -18,8 +18,26 @@
       }
     }
   }
-  .card-short--featured {
-    padding: 0;
-    box-shadow: none;
-    gap: 20px
-  }
+
+.card-image-container {
+  width: 100px;
+  height: 100px;
+}
+
+.card-image-link {
+  display: block; 
+  width: 100px;
+  height: 100px;
+}
+
+.featured-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.card-short--featured {
+  padding: 0;
+  box-shadow: none;
+  gap: 20px
+}

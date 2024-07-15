@@ -1,6 +1,5 @@
 package com.blog.essential.web.converter;
 
-import com.blog.essential.web.model.LatestPostModel;
 import com.blog.essential.web.model.MostViewPostModel;
 import com.blog.essential.web.model.MostVotePostModel;
 import com.blog.essential.web.response.WebLatestPostResponse;
@@ -11,6 +10,8 @@ import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 import org.youngmonkeys.ezyarticle.sdk.model.PostModel;
 import org.youngmonkeys.ezyplatform.model.MediaNameModel;
 import org.youngmonkeys.ezyplatform.model.UuidNameModel;
+
+import java.math.BigInteger;
 
 @EzySingleton
 public class WebEssentialModelToResponseConverter {
@@ -57,11 +58,11 @@ public class WebEssentialModelToResponseConverter {
     }
 
     public WebLatestPostResponse toLatestPostResponse(
-        LatestPostModel model,
+        PostModel model,
         UuidNameModel author,
         MediaNameModel image,
         String slug,
-        long viewCount
+        BigInteger viewCount
     ) {
         return WebLatestPostResponse.builder()
             .slug(slug)

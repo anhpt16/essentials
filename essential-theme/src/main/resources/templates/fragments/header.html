@@ -14,7 +14,7 @@
                 <a href="/posts">[[#{category}]]</a>
                 <th:block th:if="${categories.size() > 0}">
                   <i class="fas fa-angle-down"></i>
-                  <ul class="sub-menu">
+                  <ul class="sub-menu" id="header-subsubmenu">
                     <!-- Sub menu -->
                     <li th:each="category : ${categories}">
                       <a th:href="${'/categories/' + category.slug}">[[${category.name}]]</a>
@@ -45,15 +45,75 @@
               </li>
               <li class="header-right__follow">
                 <a href="#">[[#{followme}]]</a>
-                
               </li>
+            </ul>
+            <ul class="phone-header-left">
+              <li onclick="toggleHeaderMenu()">
+                <i class="fas fa-bars"></i>
+              </li>
+            </ul>
+            <div class="header-middle-logo">
+              <a href="/"><img src="/images/logo_fix.svg" alt="Trang Chủ"></a>
+            </div>
+            <ul class="header-right__search phone-search">
+              <a>
+                <i class="fas fa-search"></i>
+              </a>
             </ul>
           </div>
         </div>
       </nav>
+      <div class="container phone-menu-container"  id="header-submenu">
+        <ul class="phone-menu">
+          <li class="header-left__sub" onclick="toggleHeaderSubsubmenu()">
+            <a class="cate-text">[[#{category}]]</a>
+            <th:block th:if="${categories.size() > 0}">
+              <i class="fas fa-angle-down" id="icon-dropdownMenu"></i>
+              <ul id="header-subsubmenu-phone" class="sub-menu">
+                <!-- Sub menu -->
+                <li th:each="category : ${categories}">
+                  <a th:href="${'/categories/' + category.slug}">[[${category.name}]]</a>
+                </li>
+              </ul>
+            </th:block>
+          </li>
+          <li class="header-left__travel">
+            <a href="#">[[#{post}]]</a>
+          </li>
+          <li class="header-left__beauty">
+            <a href="#">[[#{about}]]</a>
+          </li>
+          <li class="header-left__travel">
+            <a href="#">[[#{contact}]]</a>
+          </li>
+          <li class="header-right__follow">
+            <a href="#">[[#{followme}]]</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <script th:fragment="scripts" type="text/javascript">
+      var toggleHeaderMenu = function() {
+        var subMenu = document.getElementById("header-submenu");
+        if (!subMenu.classList.contains('display-menu')) {
+          subMenu.classList.add('display-menu');
+        }
+        else {
+          subMenu.classList.remove('display-menu');
+        }
+      }
 
+      var toggleHeaderSubsubmenu = function() {
+        var subsubMenu = document.getElementById("header-subsubmenu-phone");
+        
+        if (subsubMenu.classList.contains('display-subsubmenu')) {
+          subsubMenu.classList.remove('display-subsubmenu');
+          console.log("donesub")
+        } else {
+          subsubMenu.classList.add('display-subsubmenu');
+        }
+
+      }
     </script>
   </body>
 </html>

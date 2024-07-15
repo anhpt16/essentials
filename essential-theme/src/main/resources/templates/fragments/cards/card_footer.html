@@ -6,9 +6,11 @@
       th:fragment="card_footer (post)"
       class="card-short card-short--featured content"
     >
-      <a th:href="${'/posts/' + post.slug}">
-        <img th:src="${post.image.getUrlOrNull()}" />
+    <div class="card-image-container">
+      <a th:href="${'/posts/' + post.slug}" class="card-image-link">
+        <img th:src="${post.image.getUrlOrNull()}" class=".featured-image"/>
       </a>
+    </div>  
       <div class="card-short__detail">
         <div class="card-title">
           <a th:href="${'/posts/' + post.slug}"

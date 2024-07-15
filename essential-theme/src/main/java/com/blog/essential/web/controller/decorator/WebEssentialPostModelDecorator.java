@@ -1,7 +1,6 @@
 package com.blog.essential.web.controller.decorator;
 
 import com.blog.essential.web.converter.WebEssentialModelToResponseConverter;
-import com.blog.essential.web.model.LatestPostModel;
 import com.blog.essential.web.model.MostViewPostModel;
 import com.blog.essential.web.model.MostVotePostModel;
 import com.blog.essential.web.response.WebLatestPostResponse;
@@ -11,12 +10,15 @@ import com.blog.essential.web.response.WebPostItemResponse;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 import lombok.AllArgsConstructor;
 import org.youngmonkeys.ezyarticle.sdk.model.PostModel;
+import org.youngmonkeys.ezyarticle.web.service.WebPostService;
 import org.youngmonkeys.ezyarticle.web.service.WebPostSlugService;
 import org.youngmonkeys.ezyplatform.model.MediaNameModel;
+import org.youngmonkeys.ezyplatform.model.PaginationModel;
 import org.youngmonkeys.ezyplatform.model.UuidNameModel;
 import org.youngmonkeys.ezyplatform.web.service.WebAdminService;
 import org.youngmonkeys.ezyplatform.web.service.WebMediaService;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +33,7 @@ public class WebEssentialPostModelDecorator {
 
     private final WebAdminService adminService;
     private final WebMediaService mediaService;
+    private final WebPostService postService;
     private final WebPostSlugService postSlugService;
     private final WebEssentialModelToResponseConverter essentialModelToResponseConverter;
 
@@ -139,34 +142,46 @@ public class WebEssentialPostModelDecorator {
         );
     }
 
-    public List<WebLatestPostResponse> decorateLatestPosts(
-        List<LatestPostModel> models
+    public PaginationModel<WebLatestPostResponse> decoratePostPagination(
+        PaginationModel<PostModel> pagination
     ) {
+        List<PostModel> models = pagination.getItems();
+
         // Lấy ra id - slug
-        List<Long> postIds = newArrayList(models, LatestPostModel::getPostId);
+        List<Long> postIds = newArrayList(models, PostModel::getId);
         Map<Long, String> slugByPostId = postSlugService.getLatestSlugMapByPostIds(postIds);
+
         // Lấy author
-        Set<Long> authorAdminIds = newHashSet(models, LatestPostModel::getAuthorAdminId);
-        Map<Long, UuidNameModel> nameByAuthor = adminService.getAdminUuidNameMapByIds(authorAdminIds);
+        Set<Long> authorAdminIds = newHashSet(models, PostModel::getAuthorAdminId);
+        Map<Long, UuidNameModel> nameByAuthor = adminService
+            .getAdminUuidNameMapByIds(authorAdminIds);
+
         // Lấy image
         Set<Long> imageIds = models
             .stream()
-            .map(LatestPostModel::getFeaturedImageId)
+            .map(PostModel::getFeaturedImageId)
             .filter(it -> it > 0)
             .collect(Collectors.toSet());
         Map<Long, MediaNameModel> imageById = mediaService.getMediaNameMapByIds(imageIds);
+
+        Map<Long, BigInteger> viewCountByPostId = postService.getViewCountMapByPostIds(
+            postIds
+        );
+
         // Converter
-        return newArrayList(
-            models,
-            post -> essentialModelToResponseConverter.toLatestPostResponse(
+        return pagination.map(post ->
+            essentialModelToResponseConverter.toLatestPostResponse(
                 post,
                 nameByAuthor.get(post.getAuthorAdminId()),
                 imageById.getOrDefault(
                     post.getFeaturedImageId(),
                     MediaNameModel.builder().build()
                 ),
-                slugByPostId.get(post.getPostId()),
-                post.getViewCount()
+                slugByPostId.get(post.getId()),
+                viewCountByPostId.getOrDefault(
+                    post.getId(),
+                    BigInteger.ZERO
+                )
             )
         );
     }

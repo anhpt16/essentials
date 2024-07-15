@@ -6,124 +6,147 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{ezytheme}"
 >
-  <body>
-    <div layout:fragment="content" class="container content-container">
-      <div class="row gx-8 gy-5">
+<body>
+  <div layout:fragment="content" class="container content-container">
+    <div class="row gx-8 gy-5">
 
-        <div class="col-lg-9">
-          <!-- Hàng 1 chứa 3 bài viết chính -->
-          <div class="row gx-8 gy-5">
+      <div class="col-lg-9">
+        <!-- Hàng 1 chứa 3 bài viết chính -->
+        <div class="row gx-8 gy-5">
 
-            <div class="col-lg-8">
-              <!-- Bài post chính -->
-              <div class="card--big">
-                <a th:href="${'/posts/' + mainPost.slug}">
-                  <img class="image" th:src="${mainPost.image != null ? mainPost.image.getUrlOrNull() : ''}"
-                  />
-                </a>
-                <div class="card-author">
-                  <i>by </i><a href="#"><b>[[${mainPost.author.name}]]</b></a>
-                </div>
-                <div class="card-title">
-                  <a th:href="${'/posts/' + mainPost.slug}"><b>[[${mainPost.title}]]</b></a>
-                </div>
-                <span class="card-date date-string"
-                  >[[${mainPost.publishedAt}]]</span
-                >
-                <div class="card-content">
-                  [[${mainPost.content.replaceAll("<[^>]*>", "")}]]
-                </div>
+          <div class="col-lg-8">
+            <!-- Bài post chính -->
+            <div class="card--big">
+              <a th:href="${'/posts/' + mainPost.slug}">
+                <img class="image" th:src="${mainPost.image != null ? mainPost.image.getUrlOrNull() : ''}"
+                />
+              </a>
+              <div class="card-author">
+                <i>by </i><a href="#"><b>[[${mainPost.author.name}]]</b></a>
               </div>
-            </div>
-
-            <div class="col-lg-4">
-              <!-- 2 bài viết phụ -->
-              <div class="row gx-6 gy-5">
-                <div th:replace="~{fragments/cards/card_extra :: card_extra}"></div>
+              <div class="card-title">
+                <a th:href="${'/posts/' + mainPost.slug}"><b>[[${mainPost.title}]]</b></a>
+              </div>
+              <span class="card-date date-string"
+                >[[${mainPost.publishedAt}]]</span
+              >
+              <div class="card-content">
+                [[${mainPost.content.replaceAll("<[^>]*>", "")}]]
               </div>
             </div>
           </div>
-          <!-- Hàng 2 bảng whiteboard-->
-           <!-- Phần tiêu đề -->
-          <div class="list-card--whiteboard">
+
+          <div class="col-lg-4">
+            <!-- 2 bài viết phụ -->
+            <div class="row gx-6 gy-5">
+              <div th:replace="~{fragments/cards/card_extra :: card_extra}"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Hàng 2 bảng whiteboard-->
+         <!-- Phần tiêu đề -->
+        <div class="list-card--whiteboard">
+          <div class="list-card__title">
+            <div class="container-for-title">
+              <div class="title-section">[[#{whiteboard}]]</div>
+              <div class="line"></div>
+            </div>
+          </div>
+          <!-- Phần danh sách card -->
+          <div class="row gx-8 gy-5" id="postListBody">
+            <div class="col-lg-4 col-md-6 col-sm-12" th:each="latestPost : ${latestPostPagination.items}">
+              <th:block th:replace="~{fragments/cards/card_whiteboard :: card_whiteboard(latestPost=${latestPost})}"/>
+            </div>
+          </div>
+        </div>
+        <!-- Phần chuyển trang -->
+         <div th:if="${latestPostPagination.pageToken.next != null}" class="load-mores">
+            <button type="button" class="btn btn-primary" onclick="fetchPostList()">[[#{load_mores}]]</button>
+         </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="row gx-8 gy-5">
+          <!-- Phần top 5 bài viết trending -->
+          <div class="col-lg-12 col-md-6 list-card--trending">
+            <!-- Phần tiêu đề cho list card -->
             <div class="list-card__title">
               <div class="container-for-title">
-                <div class="title-section">[[#{whiteboard}]]</div>
+                <div class="title-section">[[#{trending}]]</div>
+                <div class="line"></div>
+              </div>
+              <div class="des-section">
+                <p>[[#{message_trending}]]</p>
+              </div>
+            </div>
+            <!-- Top 5 card trending -->
+            <div th:each="mostViewPost : ${mostViewPosts}">
+              <th:block th:replace="~{fragments/cards/card_trending :: content(mostViewPost=${mostViewPost})}" />
+            </div>
+          </div>
+          <!-- Phần các bài viết nổi bật -->
+          <div class="col-lg-12 col-md-6 list-card--feature">
+            <!-- Phần tiêu đề -->
+            <div class="list-card__title">
+              <div class="container-for-title">
+                <div class="title-section">[[#{feature}]]</div>
                 <div class="line"></div>
               </div>
             </div>
-            <!-- Phần danh sách card -->
-            <div class="row gx-8 gy-5">
-              <div class="col-lg-4 col-md-6 col-sm-12" th:each="latestPost : ${latestPosts}">
-                <th:block th:replace="~{fragments/cards/card_whiteboard :: card_whiteboard(latestPost=${latestPost})}"/>
+             <!-- Phần list card nổi bật -->
+              <div class="list-card__block" th:each="mostVotePost, iterStat : ${mostVotePosts}">
+                <th:block th:replace="~{fragments/cards/card_featured :: card_featured(mostVotePost=${mostVotePost}, first=${iterStat.index == 0})}"></th:block>
               </div>
-            </div>
-          </div>
-          <!-- Phần chuyển trang -->
-           <div class="page-switch">
-            <div class="container-for-switch">
-              <div class="switch-page"><a href="#">
-                <i class="fas fa-angle-double-left"></i>
-              </a></div>
-              <div class="switch-page"><a href="#">
-                <i class="fas fa-angle-left"></i>
-              </a></div>
-              <div class="switch-page"><a href="#">
-                1
-              </a></div>
-              <div class="switch-page"><a href="#">
-                2
-              </a></div>
-              <div class="switch-page"><a href="#">
-                ...
-              </a></div>
-              <div class="switch-page"><a href="#">
-                <i class="fas fa-angle-right"></i>
-              </a></div>
-              <div class="switch-page"><a href="#">
-                <i class="fas fa-angle-double-right"></i>
-              </a></div>
-            </div>
-           </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="row gx-8 gy-5">
-            <!-- Phần top 5 bài viết trending -->
-            <div class="col-lg-12 col-md-6 list-card--trending">
-              <!-- Phần tiêu đề cho list card -->
-              <div class="list-card__title">
-                <div class="container-for-title">
-                  <div class="title-section">[[#{trending}]]</div>
-                  <div class="line"></div>
-                </div>
-                <div class="des-section">
-                  <p>[[#{message_trending}]]</p>
-                </div>
-              </div>
-              <!-- Top 5 card trending -->
-              <div th:each="mostViewPost : ${mostViewPosts}">
-                <th:block th:replace="~{fragments/cards/card_trending :: content(mostViewPost=${mostViewPost})}" />
-              </div>
-            </div>
-            <!-- Phần các bài viết nổi bật -->
-            <div class="col-lg-12 col-md-6 list-card--feature">
-              <!-- Phần tiêu đề -->
-              <div class="list-card__title">
-                <div class="container-for-title">
-                  <div class="title-section">[[#{feature}]]</div>
-                  <div class="line"></div>
-                </div>
-              </div>
-               <!-- Phần list card nổi bật -->
-                <div class="list-card__block" th:each="mostVotePost, iterStat : ${mostVotePosts}">
-                  <th:block th:replace="~{fragments/cards/card_featured :: card_featured(mostVotePost=${mostVotePost}, first=${iterStat.index == 0})}"></th:block>
-                </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
-    <th:block layout:fragment="post-scripts"> </th:block>
-  </body>
+  </div>
+<script layout:fragment="scripts" th:inline="javascript">
+/*<![CDATA[*/
+var lastPostPageToken = {};
+lastPostPageToken.next = /*[[${latestPostPagination.pageToken.next}]]*/;
+/*]]>*/
+
+//================ class list =============
+var fetchPostList = function() {
+  var queryString = '';
+  if (lastPostPageToken.next) {
+    queryString += '&nextPageToken=' + lastPostPageToken.next;
+  } else {
+    return;
+  }
+  if (ezyweb.lang) {
+    queryString += '&lang=' + ezyweb.lang;
+  }
+  $.ajax({
+    url: '/api/v1/posts?limit=3' + queryString,
+    type: 'GET',
+    dataType: 'json'
+  })
+  .done(function(data) {
+    lastPostPageToken = data.pageToken;
+    $('#postListBody').append(
+        buildPostListBodyHtml(data.items)
+    );
+    if (!data.continuation.hasNext) {
+      $('#nextButtonContainer').remove();
+    }
+  })
+  .fail(function(e) {
+    ezyweb.processGetApiErrors(e);
+  });
+}
+var buildPostListBodyHtml = function(posts) {
+  var html = '';
+  posts.forEach((post) => {
+    html += buildPostListItemHtml(post);
+  });
+  return html;
+}
+</script>
+<th:block layout:fragment="post-scripts">
+  <script th:replace="~{fragments/cards/card_whiteboard :: scripts}" />
+</th:block>
+</body>
 </html>

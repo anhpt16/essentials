@@ -1,16 +1,13 @@
 package com.blog.essential.web.service;
 
-import com.blog.essential.constant.EssentialConstants;
 import com.blog.essential.web.converter.WebEssentialResultToModelConverter;
 import com.blog.essential.web.model.LatestPostModel;
 import com.blog.essential.web.model.MostViewPostModel;
 import com.blog.essential.web.model.MostVotePostModel;
 import com.blog.essential.web.repo.WebEssentialPostRepository;
-import com.blog.essential.web.result.MostViewPostResult;
 import com.tvd12.ezyfox.util.Next;
 import com.tvd12.ezyhttp.server.core.annotation.Service;
 import lombok.AllArgsConstructor;
-import org.youngmonkeys.ezyarticle.sdk.entity.Post;
 import org.youngmonkeys.ezyarticle.sdk.model.PostModel;
 import org.youngmonkeys.ezyarticle.web.converter.WebEzyArticleEntityToModelConverter;
 import org.youngmonkeys.ezyarticle.web.repo.WebPostRepository;

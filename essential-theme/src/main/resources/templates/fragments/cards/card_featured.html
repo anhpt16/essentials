@@ -7,9 +7,11 @@
       class="card-short card-short--featured content"
       th:classappend="${first} ? 'first-card'"
     >
-      <a th:href="${'/posts/' + mostVotePost.slug}">
-        <img th:src="${mostVotePost.image.getUrlOrNull()}" />
+    <div class="card-image-container">
+      <a th:href="${'/posts/' + mostVotePost.slug}" class="card-image-link">
+        <img th:src="${mostVotePost.image.getUrlOrNull()}" class="featured-image"/>
       </a>
+    </div>  
       <div class="card-short__detail">
         <div class="card-title">
           <a th:href="${'/posts/' + mostVotePost.slug}"

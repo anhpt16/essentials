@@ -7,28 +7,7 @@
         <div class="container">
           <!-- Phần subcribe -->
           <div class="footer-subcribe">
-            <div class="footer-subcribe__title">
-              Never trust atoms; they make up everything
-            </div>
-            <div class="footer-subcribe__notify">
-              Subscribe to my newsletter for all the latest updates:
-            </div>
-            <div class="footer-subcribe__input">
-              <div class="container-for-subcribe">
-                <input
-                  type="text"
-                  placeholder="Your email address"
-                  name=""
-                  id=""
-                />
-                <a href="">
-                  <div class="btn-subcribe">
-                    <i class="fab fa-telegram-plane"></i>
-                    <span>subcribe</span>
-                  </div>
-                </a>
-              </div>
-            </div>
+            
           </div>
           <!-- Phần 4 cột -->
           <div class="row gx-8 gy-5 footer-table">
@@ -94,10 +73,11 @@
               </div>
               <!-- Phần các danh mục -->
                <ul class="footer-category">
-                <li><a href="#">Văn học</a></li>
-                <li><a href="#">Công nghệ</a></li>
-                <li><a href="#">Giáo dục</a></li>
-                <li><a href="#">Tài chính</a></li>
+                <th:block th:if="${categories.size() > 0}">
+                <li th:each="category : ${categories}">
+                  <a th:href="${'/categories/' + category.slug}">[[${category.name}]]</a>
+                </li>
+                </th:block>
                </ul>
             </div>
           </div>

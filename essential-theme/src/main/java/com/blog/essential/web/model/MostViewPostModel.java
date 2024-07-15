@@ -1,9 +1,7 @@
 package com.blog.essential.web.model;
 
-import com.tvd12.ezyfox.database.annotation.EzyQueryResult;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Builder

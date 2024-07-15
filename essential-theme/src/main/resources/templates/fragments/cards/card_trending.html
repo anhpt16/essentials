@@ -4,9 +4,11 @@
   <body>
     <div th:fragment="content" class="content">
         <div class="card-short">
-            <a th:href="${'/posts/' + mostViewPost.slug}">
-                <img th:src="${mostViewPost.image.getUrlOrNull()}" />
+          <div class="card-image-container">
+            <a th:href="${'/posts/' + mostViewPost.slug}" class="card-image-link">
+                <img th:src="${mostViewPost.image.getUrlOrNull()}" class="featured-image"/>
             </a>
+          </div>  
             <div class="card-short__detail">
               <div class="card-title">
                 <a th:href="${'/posts/' + mostViewPost.slug}">

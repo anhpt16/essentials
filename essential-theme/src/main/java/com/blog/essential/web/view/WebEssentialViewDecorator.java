@@ -4,7 +4,6 @@ import com.blog.essential.web.controller.service.WebEssentialPostControllerServi
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 import com.tvd12.ezyhttp.server.core.view.View;
 import lombok.AllArgsConstructor;
-import org.youngmonkeys.ezyarticle.web.service.WebPostService;
 import org.youngmonkeys.ezyarticle.web.service.WebTermService;
 import org.youngmonkeys.ezyplatform.web.view.WebViewDecorator;
 
@@ -37,4 +36,5 @@ public class WebEssentialViewDecorator extends WebViewDecorator {
     }
 
 }
-// Lớp này sẽ được chạy sau khi View được tạo ra nó sẽ được framework gọi ở bên trong trước khi gen html từ template
+// Lớp này sẽ được chạy sau khi View được tạo ra nó sẽ
+// được framework gọi ở bên trong trước khi gen html từ template

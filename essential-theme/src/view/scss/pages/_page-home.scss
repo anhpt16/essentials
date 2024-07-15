@@ -71,6 +71,20 @@
           font-size: $card-medium-text-title;
         }
       }
+      .card-image-container {
+        width: 100%;
+        height: auto;
+      }
+      .card-image-link {
+        display: block; 
+        width: 100%;
+        height: 100%;
+      }
+      .featured-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 }
@@ -91,6 +105,11 @@
 
 
 // Chuyển trang
+.load-mores {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
 .page-switch {
 
   .container-for-switch {
@@ -126,20 +145,150 @@
 
 
 // Responsive
+@media (max-width: 1399.98px) {
+  .content-container {
+    padding: 30px 30px;
+  }
+}
+@media (max-width: 1199.98px) {
+  .content-container {
+    padding: 20px 0 0 0;
+  }
+  // Chỉnh kích thước cho card big
+  .card--big {
+    @include card-style($card-big-text-title - 4px, $card-big-text-content - 3px, $card-big-text-detail);
+  }
+  // CHỉnh kích thước card-medium
+  .card--medium {
+    @include card-style($card-medium-text-title - 2px, $card-medium-text-content, $card-medium-text-content);
+    img {
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+  .card-whiteboard .card-content {
+    font-size: 14px !important;
+  }
+  // Chỉnh kích thước card short
+  .card-image-container {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .card-image-link {
+    display: block; 
+    width: 80px;
+    height: 80px;
+  }
+  
+  .featured-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  //Điều chỉnh first card
+  .list-card--feature {
+    .list-card__block {
+      .first-card {
+        .card-short__detail {
+          .card-title {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 991.98px) {
+  // Header
+  .header-left, .header-right {
+    display: none;
+  }
+  .phone-header-left {
+    display: flex !important;
+  }
+  .header-middle-logo, 
+  .phone-search {
+    display: block;
+  }
+  .content-container {
+    padding: 20px 20px;
+  }
+  // CHỉnh kích thước card-medium
+  .card--medium {
+    @include card-style($card-medium-text-title, $card-medium-text-content, $card-medium-text-content);
+    img {
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+  //Điều chỉnh first card
+  .list-card--feature {
+    .list-card__block {
+      .first-card {
+        .card-short__detail {
+          .card-title {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767.98px) {
+  // CHỉnh kích thước card-medium
+  .card--medium {
+    img {
+      height: 300px;
+      object-fit: cover;
+    }
+  }
+  // Chỉnh kích thước card short
+  .card-short {
+    @include card-style($card-small-text-title + 2px, $card-small-text-content, $card-medium-text-detail + 2px)
+  }
+  .card-image-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .card-image-link {
+    display: block; 
+    width: 100px;
+    height: 100px;
+  }
+
+  .featured-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+}
 
 @media (max-width: 575.98px) {
   .content-container {
     padding: 30px 30px;
   }
   .card--medium {
-    @include card-style($card-medium-text-title + 5px, $card-medium-text-content, $card-medium-text-content)
+    @include card-style($card-medium-text-title, $card-medium-text-content, $card-medium-text-content)
   }
   .card-short {
-    @include card-style($card-small-text-title + 5px, $card-small-text-content, $card-medium-text-detail + 5px)
+    @include card-style($card-small-text-title + 2px, $card-small-text-content, $card-medium-text-detail + 2px)
+  }
+  //Điều chỉnh first card
+  .list-card--feature {
+    .list-card__block {
+      .first-card {
+        .card-short__detail {
+          .card-title {
+            font-size: 18px;
+          }
+        }
+      }
+    }
   }
 }
 
-@media (max-width: 767.98px) {}
-@media (max-width: 991.98px) {}
-@media (max-width: 1199.98px) {}
-@media (max-width: 1399.98px) {}
+
+
+

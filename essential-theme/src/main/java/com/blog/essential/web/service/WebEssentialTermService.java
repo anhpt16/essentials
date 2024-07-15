@@ -24,10 +24,10 @@ public class WebEssentialTermService {
     }
 
     public List<Long> getPostIdsByTermId(long termId, int limit) {
-       return newArrayList(
-           essentialTermRepository
-               .findPostIdsByTermId(termId, Next.limit(limit)),
-           IdResult::getId
-       );
+        return newArrayList(
+            essentialTermRepository
+                .findPostIdsByTermId(termId, Next.limit(limit)),
+            IdResult::getId
+        );
     }
 }

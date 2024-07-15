@@ -5,6 +5,8 @@ import lombok.Getter;
 import org.youngmonkeys.ezyplatform.model.MediaNameModel;
 import org.youngmonkeys.ezyplatform.model.UuidNameModel;
 
+import java.math.BigInteger;
+
 @Getter
 @Builder
 public class WebLatestPostResponse {
@@ -14,6 +16,6 @@ public class WebLatestPostResponse {
     private final String content;
     private final long publishedAt;
     private final long commentCount;
-    private final long viewCount;
+    private final BigInteger viewCount;
     private final String slug;
 }
