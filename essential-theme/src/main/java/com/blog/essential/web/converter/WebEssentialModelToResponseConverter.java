@@ -2,12 +2,10 @@ package com.blog.essential.web.converter;
 
 import com.blog.essential.web.model.MostViewPostModel;
 import com.blog.essential.web.model.MostVotePostModel;
-import com.blog.essential.web.response.WebLatestPostResponse;
-import com.blog.essential.web.response.WebMostViewPostResponse;
-import com.blog.essential.web.response.WebMostVotePostResponse;
-import com.blog.essential.web.response.WebPostItemResponse;
+import com.blog.essential.web.response.*;
 import com.tvd12.ezyfox.bean.annotation.EzySingleton;
 import org.youngmonkeys.ezyarticle.sdk.model.PostModel;
+import org.youngmonkeys.ezyarticle.sdk.model.TermModel;
 import org.youngmonkeys.ezyplatform.model.MediaNameModel;
 import org.youngmonkeys.ezyplatform.model.UuidNameModel;
 
@@ -75,4 +73,15 @@ public class WebEssentialModelToResponseConverter {
             .viewCount(viewCount)
             .build();
     }
+
+    public WebCategoryTermResponse toCategoryTermResponse(
+        TermModel model
+    ) {
+        return WebCategoryTermResponse.builder()
+            .name(model.getName())
+            .slug(model.getSlug())
+            .termId(model.getId())
+            .build();
+    }
+
 }

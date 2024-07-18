@@ -8,7 +8,9 @@
           <div class="container header-container--collapse">
             <ul class="header-left">
               <li class="header-left__logo">
-                <a href="/"><img src="/images/logo_fix.svg" alt="Trang Chủ"></a>
+                <a href="/"
+                  ><img src="/images/logo_fix.svg" alt="Trang Chủ"
+                /></a>
               </li>
               <li class="header-left__demo">
                 <a href="/posts">[[#{category}]]</a>
@@ -17,13 +19,15 @@
                   <ul class="sub-menu" id="header-subsubmenu">
                     <!-- Sub menu -->
                     <li th:each="category : ${categories}">
-                      <a th:href="${'/categories/' + category.slug}">[[${category.name}]]</a>
+                      <a th:href="${'/categories/' + category.slug}"
+                        >[[${category.name}]]</a
+                      >
                     </li>
                   </ul>
                 </th:block>
               </li>
               <li class="header-left__travel">
-                <a href="#">[[#{post}]]</a>
+                <a href="/post-list">[[#{post}]]</a>
               </li>
               <li class="header-left__beauty">
                 <a href="#">[[#{about}]]</a>
@@ -38,7 +42,7 @@
                   <i class="fas fa-lightbulb"></i>
                 </a>
               </li>
-              <li class="header-right__search">
+              <li id="search-icon" class="header-right__search">
                 <a>
                   <i class="fas fa-search"></i>
                 </a>
@@ -53,9 +57,9 @@
               </li>
             </ul>
             <div class="header-middle-logo">
-              <a href="/"><img src="/images/logo_fix.svg" alt="Trang Chủ"></a>
+              <a href="/"><img src="/images/logo_fix.svg" alt="Trang Chủ" /></a>
             </div>
-            <ul class="header-right__search phone-search">
+            <ul id="search-icon-phone" class="header-right__search phone-search">
               <a>
                 <i class="fas fa-search"></i>
               </a>
@@ -63,7 +67,7 @@
           </div>
         </div>
       </nav>
-      <div class="container phone-menu-container"  id="header-submenu">
+      <div class="container phone-menu-container" id="header-submenu">
         <ul class="phone-menu">
           <li class="header-left__sub" onclick="toggleHeaderSubsubmenu()">
             <a class="cate-text">[[#{category}]]</a>
@@ -72,13 +76,15 @@
               <ul id="header-subsubmenu-phone" class="sub-menu">
                 <!-- Sub menu -->
                 <li th:each="category : ${categories}">
-                  <a th:href="${'/categories/' + category.slug}">[[${category.name}]]</a>
+                  <a th:href="${'/categories/' + category.slug}"
+                    >[[${category.name}]]</a
+                  >
                 </li>
               </ul>
             </th:block>
           </li>
           <li class="header-left__travel">
-            <a href="#">[[#{post}]]</a>
+            <a href="/post-list">[[#{post}]]</a>
           </li>
           <li class="header-left__beauty">
             <a href="#">[[#{about}]]</a>
@@ -91,28 +97,70 @@
           </li>
         </ul>
       </div>
+      <div id="search-overlay" class="overlay">
+        <div id="close-button">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="overlay-content">
+          <input type="text" placeholder="Tìm kiếm...." onkeydown="handleKeyDown(event)" id="search-input" />
+          <div onclick="searchPost()" id="search-button">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
     </div>
     <script th:fragment="scripts" type="text/javascript">
-      var toggleHeaderMenu = function() {
+      var toggleHeaderMenu = function () {
         var subMenu = document.getElementById("header-submenu");
-        if (!subMenu.classList.contains('display-menu')) {
-          subMenu.classList.add('display-menu');
-        }
-        else {
-          subMenu.classList.remove('display-menu');
-        }
-      }
-
-      var toggleHeaderSubsubmenu = function() {
-        var subsubMenu = document.getElementById("header-subsubmenu-phone");
-        
-        if (subsubMenu.classList.contains('display-subsubmenu')) {
-          subsubMenu.classList.remove('display-subsubmenu');
-          console.log("donesub")
+        if (!subMenu.classList.contains("display-menu")) {
+          subMenu.classList.add("display-menu");
         } else {
-          subsubMenu.classList.add('display-subsubmenu');
+          subMenu.classList.remove("display-menu");
         }
+      };
 
+      var toggleHeaderSubsubmenu = function () {
+        var subsubMenu = document.getElementById("header-subsubmenu-phone");
+
+        if (subsubMenu.classList.contains("display-subsubmenu")) {
+          subsubMenu.classList.remove("display-subsubmenu");
+          console.log("donesub");
+        } else {
+          subsubMenu.classList.add("display-subsubmenu");
+        }
+      };
+
+      // Search cho laptop
+      document
+        .getElementById("search-icon")
+        .addEventListener("click", function () {
+          document.getElementById("search-overlay").style.display = "flex";
+        });
+
+      document
+        .getElementById("close-button")
+        .addEventListener("click", function () {
+          document.getElementById("search-overlay").style.display = "none";
+        });
+
+        var searchPost = function () {
+          // Thực hiện hành động tìm kiếm tại đây
+          var searchContent = document.getElementById("search-input").value;
+          window.location.href = '/post-list?keyword=' + encodeURIComponent(searchContent);
+        };
+
+      // Search cho phone
+      document
+        .getElementById("search-icon-phone")
+        .addEventListener("click", function () {
+          document.getElementById("search-overlay").style.display = "flex";
+        });
+
+      // Search Enter
+      function handleKeyDown(event) {
+        if (event.keyCode === 13) {
+          searchPost();
+        }
       }
     </script>
   </body>

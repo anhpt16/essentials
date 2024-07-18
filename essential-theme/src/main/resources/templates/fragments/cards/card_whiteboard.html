@@ -3,11 +3,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="card_whiteboard" class="card--medium card-whiteboard">
-  <a th:href="${'/posts/' + latestPost.slug}"
-    ><img
+  <a th:href="${'/posts/' + latestPost.slug}">
+    <img
     th:src="${latestPost.image.getUrlOrNull()}"
-      alt=""
-  /></a>
+      alt=""/>
+    </a>
   <div class="card-info">
     <div class="card-avatar">
       <a href="#"
@@ -26,7 +26,7 @@
   </div>
   <div class="card-title"><a th:href="${'/posts/' + latestPost.slug}">[[${latestPost.title}]]</a></div>
   <div class="card-content">
-    [[${mainPost.content.replaceAll("<[^>]*>", "")}]]
+    [[${latestPost.content.replaceAll("<[^>]*>", "")}]]
   </div>
   <ul class="card-index">
     <li>

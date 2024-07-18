@@ -1,5 +1,6 @@
 package com.blog.essential.web.service;
 
+import com.blog.essential.web.converter.WebEssentialResultToModelConverter;
 import com.blog.essential.web.repo.WebEssentialTermRepository;
 import com.tvd12.ezyfox.util.Next;
 import com.tvd12.ezyhttp.server.core.annotation.Service;
@@ -15,6 +16,7 @@ import static com.tvd12.ezyfox.io.EzyLists.newArrayList;
 public class WebEssentialTermService {
 
     private final WebEssentialTermRepository essentialTermRepository;
+    private final WebEssentialResultToModelConverter essentialResultToModelConverter;
 
     public long getPostIdByTermId(long termId) {
         IdResult result = essentialTermRepository.findPostIdByTermId(

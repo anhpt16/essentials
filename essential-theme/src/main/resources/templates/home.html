@@ -41,7 +41,7 @@
             <div class="row gx-6 gy-5">
               <div th:replace="~{fragments/cards/card_extra :: card_extra}"></div>
             </div>
-          </div>
+          </div>  
         </div>
         <!-- Hàng 2 bảng whiteboard-->
          <!-- Phần tiêu đề -->
@@ -61,7 +61,7 @@
         </div>
         <!-- Phần chuyển trang -->
          <div th:if="${latestPostPagination.pageToken.next != null}" class="load-mores">
-            <button type="button" class="btn btn-primary" onclick="fetchPostList()">[[#{load_mores}]]</button>
+            <button id="nextButtonContainer" type="button" class="btn btn-primary" onclick="fetchPostList()">[[#{load_mores}]]</button>
          </div>
       </div>
 

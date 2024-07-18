@@ -146,16 +146,13 @@ public class WebEssentialPostModelDecorator {
         PaginationModel<PostModel> pagination
     ) {
         List<PostModel> models = pagination.getItems();
-
         // Lấy ra id - slug
         List<Long> postIds = newArrayList(models, PostModel::getId);
         Map<Long, String> slugByPostId = postSlugService.getLatestSlugMapByPostIds(postIds);
-
         // Lấy author
         Set<Long> authorAdminIds = newHashSet(models, PostModel::getAuthorAdminId);
         Map<Long, UuidNameModel> nameByAuthor = adminService
             .getAdminUuidNameMapByIds(authorAdminIds);
-
         // Lấy image
         Set<Long> imageIds = models
             .stream()
@@ -163,11 +160,9 @@ public class WebEssentialPostModelDecorator {
             .filter(it -> it > 0)
             .collect(Collectors.toSet());
         Map<Long, MediaNameModel> imageById = mediaService.getMediaNameMapByIds(imageIds);
-
         Map<Long, BigInteger> viewCountByPostId = postService.getViewCountMapByPostIds(
             postIds
         );
-
         // Converter
         return pagination.map(post ->
             essentialModelToResponseConverter.toLatestPostResponse(

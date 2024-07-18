@@ -57,4 +57,5 @@ public class WebEssentialResultToModelConverter {
             .publishedAt(toTimestamp(result.getPublishedAt(), zoneId))
             .build();
     }
+
 }

@@ -83,18 +83,18 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: org.youngmonkeys:ezyarticle-sdk:0.1.8">
+      <library name="Maven: org.youngmonkeys:ezyarticle-sdk:0.1.9">
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/ezyplatform-0.2.3/ezyplatform/admin/plugins/ezyarticle/lib/ezyarticle-sdk-0.1.8.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/ezyplatform-0.2.3/ezyplatform/admin/plugins/ezyarticle/lib/ezyarticle-sdk-0.1.9.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: org.youngmonkeys:ezyarticle-admin-plugin:0.1.8">
+      <library name="Maven: org.youngmonkeys:ezyarticle-admin-plugin:0.1.9">
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/ezyplatform-0.2.3/ezyplatform/admin/plugins/ezyarticle/lib/ezyarticle-admin-plugin-0.1.8.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/ezyplatform-0.2.3/ezyplatform/admin/plugins/ezyarticle/lib/ezyarticle-admin-plugin-0.1.9.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

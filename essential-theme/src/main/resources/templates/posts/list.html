@@ -2,12 +2,234 @@
 <html
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:ezy="http://www.ezyplatform.com/thymeleaf/layout"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{ezytheme}"
 >
-<body>
-<div layout:fragment="content" class="container content-container">
-</div>
-</body>
+  <body>
+    <div layout:fragment="content" class="container content-container">
+      <div class="row gx-8 gy-5">
+        <div class="col-3 list-post-filter">
+          <!-- Lọc bài viết -->
+          <div class="filter-title">
+            <i class="fas fa-filter"></i>
+            <p>[[#{filter_title}]]</p>
+          </div>
+          <div class="filter-by filter-by__category">
+            <p>[[#{filter_by_category}]]</p>
+            <div th:each="category : ${listTermCategory}" class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                th:value="${category.termId}"
+                name="checkbox_cate_filter"
+                onclick="updatePostFilterByCate()"
+              />
+              <label class="form-check-label">
+                [[${category.name}]]
+              </label>
+            </div>
+          </div>
+          <div class="filter-by filter-by__author">
+            <p>[[#{filter_by_author}]]</p>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="">
+                Default checkbox
+              </label>
+            </div>
+          </div>
+          <!-- Sắp xếp bài viết -->
+          <div class="sort-title">
+            <i class="fas fa-sort"></i>
+            <p>[[#{sort_title}]]</p>
+          </div>
+          <div class="sort-by sort-by__date">
+            <div class="container-for-section">
+              <p>[[#{sort_by_date}]]</p>
+              <i onclick="uncheckSortDate()" class="fas fa-minus-circle"></i>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sort_date" id="sortDateRadio1">
+              <label class="form-check-label" for="sortDateRadio1">
+                [[#{newest}]]
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sort_date" id="sortDateRadio2">
+              <label class="form-check-label" for="sortDateRadio2">
+                [[#{oldest}]]
+              </label>
+            </div>
+          </div>
+          <div class="sort-by sort-by__view">
+            <div class="container-for-section">
+              <p>[[#{sort_by_view}]]</p>
+              <i onclick="uncheckSortView()" class="fas fa-minus-circle"></i>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sort_view" id="sortViewRadio1">
+              <label class="form-check-label" for="sortViewRadio1">
+                [[#{highest}]]
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sort_view" id="sortViewRadio2">
+              <label class="form-check-label" for="sortViewRadio2">
+                [[#{lowest}]]
+              </label>
+            </div>
+          </div>
+          <div class="sort-by sort-by__vote">
+            <div class="container-for-section">
+              <p>[[#{sort_by_vote}]]</p>
+              <i onclick="uncheckSortVote()" class="fas fa-minus-circle"></i>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sort_vote" id="sortVoteRadio1">
+              <label class="form-check-label" for="sortVoteRadio1">
+                [[#{highest}]]
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sort_vote" id="sortVoteRadio2">
+              <label class="form-check-label" for="sortVoteRadio2">
+                [[#{lowest}]]
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="row gx-8 gy-5"  id="listPostBody">
+            <!-- Kiểm tra danh sách cách bài viết -->
+            <div th:if="${#lists.isEmpty(listPostPagination.items)}">
+              <div class="col-12 empty-list">
+                  <p>[[#{not_find_post}]]</p>
+              </div>
+            </div>
+            <!-- Đưa ra danh sách các bài viết -->
+            <div class="col-lg-4 col-md-6 col-sm-12" th:each="latestPost : ${listPostPagination.items}">
+              <th:block th:if="${latestPost != null and !#strings.isEmpty(latestPost)}">
+                <th:block
+                  th:replace="~{fragments/cards/card_whiteboard :: card_whiteboard(latestPost=${latestPost})}"
+                />
+              </th:block>
+            </div>
+          </div>
+          <div class="list-post-switch">
+            <button id="prevListPost" type="button" onclick="fetchPostList('previous')" class="btn btn-primary btn-sm"
+                    th:classappend="${listPostPagination.pageToken.prev == null ? 'd-none' : ''}">
+              [[#{previous_page}]]
+            </button>
+            <button id="nextListPost" type="button" onclick="fetchPostList('next')" class="btn btn-primary btn-sm"
+                    th:classappend="${listPostPagination.pageToken.next == null ? 'd-none' : ''}">
+              [[#{next_page}]]
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script layout:fragment="scripts" th:inline="javascript">
+      /*<![CDATA[*/
+      var searchKeyword = /*[[${searchKeyword}]]*/;
+      var pageToken = /*[[${listPostPagination.pageToken}]]*/;
+      /*]]>*/
+      var selectedCategoryIds = null;
+
+      // Uncheck for radio buttons
+      function uncheckSortDate() {
+        const radios = document.querySelectorAll('input[name="sort_date"]');
+        radios.forEach((radio) => {
+          radio.checked = false;
+        });
+      }
+      function uncheckSortView() {
+        const radios = document.querySelectorAll('input[name="sort_view"]');
+        radios.forEach((radio) => {
+          radio.checked = false;
+        });
+      }
+      function uncheckSortVote() {
+        const radios = document.querySelectorAll('input[name="sort_vote"]');
+        radios.forEach((radio) => {
+          radio.checked = false;
+        });
+      }
+
+      // Phần lọc bài viết theo danh mục
+      // Hàm lọc bài viết
+      function updatePostFilterByCate() {
+        // Get all cate_filter checkbox
+        var checkboxes = document.querySelectorAll('input[name="checkbox_cate_filter"]:checked');
+
+        // Get values of checked checkboxes
+        selectedCategoryIds = Array.from(checkboxes).map(checkbox => {
+          return checkbox.value;
+        });
+        pageToken = {};
+        fetchPostList("next");
+      }
+
+      // Get list post
+      var fetchPostList = function(action) {
+        var queryString = '';
+        if (action === 'next') {
+          if (pageToken.next) {
+            queryString += '&nextPageToken=' + pageToken.next;
+          }
+        } else {
+          if (pageToken.prev) {
+            queryString += '&prevPageToken=' + pageToken.prev;
+          }
+        }
+        if (selectedCategoryIds && selectedCategoryIds.length) {
+          queryString += '&categoryIds=' + selectedCategoryIds.join(',');
+        }
+        if (searchKeyword) {
+          queryString += '&keyword=' + searchKeyword;
+        }
+        if (ezyweb.lang) {
+          queryString += '&lang=' + ezyweb.lang;
+        }
+        $.ajax({
+          url: '/api/v1/posts?limit=6' + queryString,
+          type: 'GET',
+          dataType: 'json'
+        })
+        .done(function(data) {
+          pageToken = data.pageToken;
+          $('#listPostBody').html(
+              buildPostListBodyHtml(data.items)
+          );
+          if (pageToken.next) {
+            $('#nextListPost').removeClass("d-none");
+          } else {
+            $('#nextListPost').addClass("d-none");
+          }
+          if (pageToken.prev) {
+            $('#prevListPost').removeClass("d-none");
+          } else {
+            $('#prevListPost').addClass("d-none");
+          }
+        })
+        .fail(function(e) {
+          ezyweb.processGetApiErrors(e);
+        });
+      }
+      var buildPostListBodyHtml = function(posts) {
+        var html = '';
+        posts.forEach((post) => {
+          html += buildPostListItemHtml(post);
+        });
+        return html;
+      }
+    </script>
+    <th:block layout:fragment="post-scripts">
+      <script th:replace="~{fragments/cards/card_whiteboard :: scripts}" />
+    </th:block>
+  </body>
 </html>

@@ -10,6 +10,7 @@ import com.blog.essential.web.response.WebPostItemResponse;
 import com.blog.essential.web.service.WebEssentialPostService;
 import com.blog.essential.web.service.WebEssentialTermService;
 import com.tvd12.ezyhttp.server.core.annotation.Service;
+import javafx.scene.effect.SepiaTone;
 import lombok.AllArgsConstructor;
 import org.youngmonkeys.ezyarticle.sdk.entity.PostStatus;
 import org.youngmonkeys.ezyarticle.sdk.entity.PostType;
@@ -26,6 +27,7 @@ import org.youngmonkeys.ezyplatform.web.service.WebAdminService;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static com.blog.essential.constant.EssentialConstants.*;
 import static com.tvd12.ezyfox.io.EzyStrings.isNotBlank;
@@ -107,6 +109,38 @@ public class WebEssentialPostControllerService {
         List<MostVotePostModel> posts = essentialPostService
             .getMostVotePosts(NUMBER_OF_MOST_VOTE_POSTS_FOOTER);
         return essentialPostModelDecorator.decorateMostVotePosts(posts);
+    }
+
+    public PaginationModel<WebLatestPostResponse> getPostPagination(
+        String authorUuid,
+        String termSlug,
+        String keyword,
+        String nextPageToken,
+        String prevPageToken,
+        boolean lastPage,
+        Set<Long> categoryIds,
+        int limit
+    ) {
+        Long authorAdminId = null;
+        if (isNotBlank(authorUuid)) {
+            AdminModel authorAdmin = adminService.getAdminByUuid(authorUuid);
+            if (authorAdmin != null) {
+                authorAdminId = authorAdmin.getId();
+            }
+        }
+        return getPostPagination(
+            postFilterFactory.newDefaultPostFilterBuilder(keyword)
+                .authorAdminId(authorAdminId)
+                .termSlug(termSlug)
+                .postStatus(PostStatus.PUBLISHED.toString())
+                .postType(PostType.POST.toString())
+                .termIds(categoryIds)
+                .build(),
+            nextPageToken,
+            prevPageToken,
+            lastPage,
+            limit
+        );
     }
 
     public PaginationModel<WebLatestPostResponse> getPostPagination(

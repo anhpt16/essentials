@@ -15,7 +15,9 @@ import org.youngmonkeys.ezyplatform.web.validator.WebCommonValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
+import java.util.Set;
 
+import static com.tvd12.ezyfox.io.EzyCollections.isEmpty;
 import static org.youngmonkeys.ezyplatform.util.HttpRequests.getLanguage;
 
 @Api
@@ -34,6 +36,7 @@ public class WebEssentialApiPostController {
         HttpServletRequest request,
         @RequestParam("author") String authorUuid,
         @RequestParam("term") String termSlug,
+        @RequestParam("categoryIds") Set<Long> categoryIds,
         @RequestParam("keyword") String keyword,
         @RequestParam("nextPageToken") String nextPageToken,
         @RequestParam("prevPageToken") String prevPageToken,
@@ -52,6 +55,7 @@ public class WebEssentialApiPostController {
                 nextPageToken,
                 prevPageToken,
                 lastPage,
+                isEmpty(categoryIds) ? null : categoryIds,
                 limit
             );
     }

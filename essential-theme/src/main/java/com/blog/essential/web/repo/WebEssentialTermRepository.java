@@ -24,5 +24,4 @@ public interface WebEssentialTermRepository
     )
     List<IdResult> findPostIdsByTermId(long termId, Next next);
 
-
 }

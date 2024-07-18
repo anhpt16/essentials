@@ -17,7 +17,7 @@
     <properties>
         <!--suppress UnresolvedMavenProperty -->
         <ezyplatform.home>${env.EZYPLATFORM_HOME}</ezyplatform.home>
-    <ezyarticle.version>0.1.8</ezyarticle.version>
+    <ezyarticle.version>0.1.9</ezyarticle.version>
     </properties>
 
     <modules>
